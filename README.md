@@ -1,8 +1,8 @@
 # STM32F030F4 Bare metal programming
 
-![Pipeline Status](https://gitlab.univ-lille.fr/nemo.cazin.etu/cazin_cegarra_projet_test_maintenance/badges/main/pipeline.svg)
+![Pipeline Status](https://github.com/nemocazin/stm32f030f4-bare-metal-programming/actions/workflows/ci.yml/badge.svg)
 
-![Code Coverage](https://gitlab.univ-lille.fr/nemo.cazin.etu/cazin_cegarra_projet_test_maintenance/badges/main/coverage.svg)
+![Code Coverage](https://codecov.io/github/nemocazin/stm32f030f4-bare-metal-programming/graph/badge.svg?token=GVIVAL2Y8H)
 
 ## Table of content
 

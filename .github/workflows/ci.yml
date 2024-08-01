@@ -1,0 +1,86 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - badges
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Set up dependencies
+      run: sudo apt-get -y update && sudo apt-get -y install clang-format
+    - name: Lint source code
+      run: clang-format -i Code/src/*.c && clang-format -i Code/tests/*.c
+
+  build:
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Set up dependencies
+      run: |
+        sudo apt-get -y update
+        sudo apt-get -y install -qq build-essential expect sudo ccache
+        sudo apt-get -y install clang-format make check lcov gcovr
+        sudo apt install -y glibc-source gcc-arm-none-eabi
+        sudo apt-get -y update
+        sudo apt-get -y upgrade
+    - name: Build main and tests
+      run: |
+        mkdir -p Code/build
+        make main -C Code/
+        make tests -C Code/
+
+  test:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Set up dependencies
+      run: |
+        sudo apt-get -y update
+        sudo apt-get -y install -qq build-essential expect sudo ccache
+        sudo apt-get -y install clang-format make check lcov gcovr
+        sudo apt install -y glibc-source gcc-arm-none-eabi
+        sudo apt-get -y update
+        sudo apt-get -y upgrade
+    - name: Build tests
+      run: make tests -C Code/
+    - name: Run tests
+      run: |
+        chmod 777 Code/build/tri_tests
+        ./Code/build/tri_tests
+
+  coverage:
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Set up dependencies
+      run: |
+        sudo apt-get -y update
+        sudo apt-get -y install -qq build-essential expect sudo ccache
+        sudo apt-get -y install clang-format make check lcov gcovr
+        sudo apt install -y glibc-source gcc-arm-none-eabi
+        sudo apt-get -y update
+        sudo apt-get -y upgrade
+    - name: Build code and generate coverage
+      run: |
+        make -C Code/
+        make coverage -C Code/
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v4.0.1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        files: ./coverage/*.info
+        flags: unittests
+        name: codecov-umbrella
