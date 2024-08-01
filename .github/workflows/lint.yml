@@ -22,5 +22,5 @@ jobs:
 
     - name: Lint source code
       run: |
-        clang-format -i ../../Code/src/*.c
-        clang-format -i ../../Code/tests/*.c
+        clang-format -i Code/src/*.c
+        clang-format -i Code/tests/*.c

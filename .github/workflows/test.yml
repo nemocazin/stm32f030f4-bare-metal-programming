@@ -25,9 +25,9 @@ jobs:
         sudo apt-get -y upgrade
 
     - name: Build tests
-      run: make tests -C ../../Code/
+      run: make tests -C Code/
 
     - name: Run tests
       run: |
         chmod 777 Code/build/tri_tests
-        ./../../Code/build/tri_tests
+        ./Code/build/tri_tests

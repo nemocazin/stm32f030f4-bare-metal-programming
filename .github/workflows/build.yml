@@ -26,6 +26,6 @@ jobs:
 
     - name: Build main and tests
       run: |
-        mkdir -p ../../Code/build
-        make main -C ../../Code/
-        make tests -C ../../Code/
+        mkdir -p Code/build
+        make main -C Code/
+        make tests -C Code/
