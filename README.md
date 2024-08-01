@@ -2,7 +2,7 @@
 
 ![Pipeline Status](https://github.com/nemocazin/stm32f030f4-bare-metal-programming/actions/workflows/ci.yml/badge.svg)
 
-![Code Coverage](https://codecov.io/github/nemocazin/stm32f030f4-bare-metal-programming/graph/badge.svg?token=GVIVAL2Y8H)](https://codecov.io/github/nemocazin/stm32f030f4-bare-metal-programming)
+![Code Coverage](https://codecov.io/github/nemocazin/stm32f030f4-bare-metal-programming/graph/badge.svg?token=GVIVAL2Y8H)
 
 ## Table of content
 
